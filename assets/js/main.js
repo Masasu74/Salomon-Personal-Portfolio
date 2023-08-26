@@ -36,19 +36,30 @@ contactMessage = document.getElementById('contact-message')
 
 const sendEmail = (e) =>{
 e.preventDefault()
-emailjs.sendForm('','','','')
+emailjs.sendForm('service_dlrhjcb','template_40e767i','#contact-form','zZBqh7PjyXJP8hMii')
+.then(()=>{
+    contactMessage.textContent='Message sent successfully ✅'
+
+    setTimeout(()=>{
+        contactMessage.textContent=''
+    },5000)
+
+    contactForm.reset()
+},()=>{
+    contactMessage.textContent='Message not sent (service error) ❌' 
+})
 }
 
 contactForm.addEventListener('submit',sendEmail)
 /*=============== SHOW SCROLL UP ===============*/ 
 
-const scrollUp =()=>{
-    const scrollUp = document.getElementById('scroll-up')
-    this.scrollY >= 350 ? scrollUp.classList.add('show-scroll')
-                        : scrollUp.classList.remove('show-scroll')
+const scrollUp = () =>{
+	const scrollUp = document.getElementById('scroll-up')
+    // When the scroll is higher than 350 viewport height, add the show-scroll class to the a tag with the scrollup class
+	this.scrollY >= 350 ? scrollUp.classList.add('show-scroll')
+						: scrollUp.classList.remove('show-scroll')
 }
-
-window.addEventListener('scroll',scrollUp)
+window.addEventListener('scroll', scrollUp)
 /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
 
 const sections = document.querySelectorAll('section[id]')
@@ -107,6 +118,7 @@ const sr=ScrollReveal({
     distance:'60px',
     duration:2500,
     delay:400,
+    // reset:true
 })
 sr.reveal(`.home__perfil,.about__image,.contact__mail`,{origin:'right'})
 sr.reveal(`.home__name,.home__info,.about__container .section__title-1,.about__info,.contact__social,.contact__data`,{origin:'left'})
